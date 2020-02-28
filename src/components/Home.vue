@@ -2,12 +2,7 @@
   <div class="forms">
     <input type="number" class="forms__input" v-model="count" placeholder="Money" />
     <div class="forms-btn">
-      <router-link
-        v-if="this.count != '' && this.count == Number(this.count)"
-        :to="this.link"
-        @click.prevent="getCount"
-        class="forms-btn__item"
-      >Count</router-link>
+      <button @click="getCount" :to="this.link" class="forms-btn__item">Count</button>
       <button class="forms-btn__item forms-btn__item--reset" type="reset" @click="reset">Clear</button>
     </div>
   </div>
@@ -27,7 +22,10 @@ export default {
       this.count = "";
     },
     getCount() {
-      return console.log(this.count);
+      if (this.count != "" && this.count == Number(this.count)) {
+        console.log(+this.count);
+        this.$router.push(this.link);
+      }
     }
   }
 };

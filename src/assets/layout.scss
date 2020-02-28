@@ -1,0 +1,66 @@
+// variables
+
+$container: 942px;
+$gap: 15px;
+$col: 12;
+$colWidth: 100% / $col;
+
+// $primaryColor: pink;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+img {
+  height: 100%;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.container {
+  max-width: $container;
+  width: 100%;
+  padding: $gap $gap;
+  margin: 0 auto;
+}
+
+.ba-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$gap;
+  margin-right: -$gap;
+}
+
+.ba-row + .ba-row {
+  margin-top: 1rem;
+}
+
+[class^="ba-col-"] {
+  padding: 0 15px;
+}
+
+@for $i from 1 through $col {
+  .ba-col-#{$i} {
+    width: $colWidth * $i;
+  }
+}
+
+.ba-hidden {
+  position: absolute;
+  left: -9999999px;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}

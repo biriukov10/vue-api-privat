@@ -5,7 +5,7 @@
       UAH to USD
       <input
         type="radio"
-        v-model="radioVal"
+        v-model="radio"
         class="convert-radio__radio"
         value="uah"
         name="price"
@@ -16,14 +16,14 @@
       USD to UAH
       <input
         type="radio"
-        v-model="radioVal"
+        v-model="radio"
         class="convert-radio__radio"
         value="usd"
         name="price"
         id="usd"
       />
     </label>
-    <router-link :to="linkTo" class="convert-radio__link">Change</router-link>
+    <button @click="toResult" class="convert-radio__link">Change</button>
     <router-link :to="linkBack" class="convert-radio__link">Back to Home</router-link>
   </div>
 </template>
@@ -34,10 +34,17 @@ export default {
     return {
       linkBack: "/",
       linkTo: "result",
-      radioVal: []
+      radio: ""
     };
   },
-  methods: {}
+  methods: {
+    toResult() {
+      if (this.radio != "") {
+        console.log(this.radio);
+        this.$router.push(this.linkTo);
+      }
+    }
+  }
 };
 </script>
 
@@ -75,6 +82,7 @@ export default {
     width: 150px;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
   }
 }
 </style>

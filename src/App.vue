@@ -5,16 +5,11 @@
 </template>
 
 <script>
-// import Home from "@/components/Home";
-// import axios from "./plugins/axios";
-
 export default {
   data() {
     return {};
   },
-  components: {
-    // startHome: Home
-  },
+  components: {},
   mounted() {
     // axios
     //   .get("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")

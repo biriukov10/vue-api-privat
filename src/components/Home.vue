@@ -1,9 +1,13 @@
 <template>
   <div class="forms">
-    <input type="number" class="forms__input" v-model="count" placeholder="Money" />
+    <input type="number" class="forms__input" v-model="$store.state.count" placeholder="Money" />
     <div class="forms-btn">
       <button @click="getCount" :to="this.link" class="forms-btn__item">Count</button>
-      <button class="forms-btn__item forms-btn__item--reset" type="reset" @click="reset">Clear</button>
+      <button
+        class="forms-btn__item forms-btn__item--reset"
+        type="reset"
+        @click="$store.getters.reset;"
+      >Clear</button>
     </div>
   </div>
 </template>
@@ -13,18 +17,17 @@ export default {
   name: "forms",
   data() {
     return {
-      count: "",
       link: "/convert"
     };
   },
   methods: {
-    reset() {
-      this.count = "";
-    },
     getCount() {
-      if (this.count != "" && this.count == Number(this.count)) {
-        console.log(+this.count);
+      if (
+        this.$store.state.count != "" &&
+        this.$store.state.count == Number(this.$store.state.count)
+      ) {
         this.$router.push(this.link);
+        console.log(+this.$store.state.count);
       }
     }
   }

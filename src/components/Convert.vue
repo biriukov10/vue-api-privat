@@ -5,7 +5,7 @@
       UAH to USD
       <input
         type="radio"
-        v-model="radio"
+        v-model="$store.state.radio"
         class="convert-radio__radio"
         value="uah"
         name="price"
@@ -16,7 +16,7 @@
       USD to UAH
       <input
         type="radio"
-        v-model="radio"
+        v-model="$store.state.radio"
         class="convert-radio__radio"
         value="usd"
         name="price"
@@ -33,15 +33,14 @@ export default {
   data() {
     return {
       linkBack: "/",
-      linkTo: "result",
-      radio: ""
+      linkTo: "result"
     };
   },
   methods: {
     toResult() {
-      if (this.radio != "") {
-        console.log(this.radio);
+      if (this.$store.state.radio != "") {
         this.$router.push(this.linkTo);
+        console.log(this.$store.state.radio);
       }
     }
   }

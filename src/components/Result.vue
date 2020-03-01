@@ -1,6 +1,6 @@
 <template>
   <div class="result">
-    Hello world
+    {{this.$store.state.getNum + doll}}
     <router-link :to="link" class="result__link">Back to Home</router-link>
   </div>
 </template>
@@ -9,8 +9,14 @@
 export default {
   data() {
     return {
-      link: "/"
+      link: "/",
+      zero: 24.69136,
+      doll: "$"
     };
+  },
+  computed: {},
+  mounted() {
+    this.$store.dispatch("getConvertNum");
   }
 };
 </script>

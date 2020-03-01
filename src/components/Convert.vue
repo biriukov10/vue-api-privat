@@ -90,9 +90,7 @@ export default {
     }
 
     &:hover {
-      background-color: #c1c1c1;
-      color: blue;
-      border-color: blue;
+      box-shadow: 0px 0px 4px 2px rgb(40, 102, 138);
     }
   }
 }

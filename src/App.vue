@@ -8,19 +8,6 @@
 export default {
   data() {
     return {};
-  },
-  components: {},
-  mounted() {
-    // axios
-    //   .get("https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11")
-    //   .then(response => {
-    //     this.info = response;
-    //   });
-    fetch(
-      "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11"
-    ).then(response => {
-      return response.json();
-    });
   }
 };
 </script>

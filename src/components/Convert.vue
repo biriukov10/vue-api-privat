@@ -23,8 +23,8 @@
         id="usd"
       />
     </label>
-    <button @click="toResult" class="convert-radio__link">Change</button>
-    <router-link :to="linkBack" class="convert-radio__link">Back to Home</router-link>
+    <button @click="toResult" class="convert-radio__btn">Change</button>
+    <router-link :to="linkBack" class="convert-radio__btn">Back to Home</router-link>
   </div>
 </template>
 
@@ -40,7 +40,6 @@ export default {
     toResult() {
       if (this.$store.state.radio != "") {
         this.$router.push(this.linkTo);
-        console.log(this.$store.state.radio);
       }
     }
   }
@@ -73,7 +72,7 @@ export default {
     cursor: pointer;
   }
 
-  &__link {
+  &__btn {
     display: inline-block;
     margin-top: 20px;
     color: #fff;
@@ -82,6 +81,19 @@ export default {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    border: 1px solid transparent;
+    transition: 0.3s;
+
+    &:active,
+    &:focus {
+      box-shadow: 1px 1px 1px 1px rgb(40, 102, 138);
+    }
+
+    &:hover {
+      background-color: #c1c1c1;
+      color: blue;
+      border-color: blue;
+    }
   }
 }
 </style>

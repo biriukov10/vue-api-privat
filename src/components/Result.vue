@@ -1,7 +1,7 @@
 <template>
   <div class="result">
-    {{this.$store.state.getNum + doll}}
-    <router-link :to="link" class="result__link">Back to Home</router-link>
+    {{this.$store.state.getNum}}
+    <router-link :to="link" class="result__btn">Back to Home</router-link>
   </div>
 </template>
 
@@ -9,9 +9,7 @@
 export default {
   data() {
     return {
-      link: "/",
-      zero: 24.69136,
-      doll: "$"
+      link: "/"
     };
   },
   computed: {},
@@ -34,7 +32,7 @@ export default {
   font-size: 1.5rem;
   text-align: center;
 
-  &__link {
+  &__btn {
     display: block;
     width: 100%;
     max-width: 150px;
@@ -45,10 +43,18 @@ export default {
     border-radius: 5px;
     margin: 20px auto 0;
     font-size: 1rem;
+    border: 1px solid transparent;
+    transition: 0.3s;
 
     &:active,
     &:focus {
       box-shadow: 1px 0 1px 1px rgb(40, 102, 138);
+    }
+
+    &:hover {
+      background-color: #c1c1c1;
+      color: blue;
+      border-color: blue;
     }
   }
 }

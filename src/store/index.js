@@ -27,7 +27,6 @@ export default new Vuex.Store({
         .then(response => {
           if (this.state.radio == 'usd') {
             this.state.getNum = (response.data[0].sale * this.state.count).toFixed(2) + this.state.uahValue;
-            Math.floor(this.state.getNum);
           }
           else if (this.state.radio == 'uah') {
             this.state.getNum = (this.state.count / response.data[0].sale).toFixed(1) + this.state.usdValue;

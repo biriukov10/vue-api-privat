@@ -7,7 +7,7 @@
       placeholder="Enter currency ₴ or $"
     />
     <div class="forms-btn">
-      <button @click="getCount" :to="this.link" class="forms-btn__item">Count</button>
+      <button @click="getCount" class="forms-btn__item">Count</button>
       <button
         class="forms-btn__item forms-btn__item--reset"
         type="reset"

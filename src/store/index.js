@@ -15,7 +15,9 @@ export default new Vuex.Store({
   },
   getters: {
     reset(state) {
-      return state.count = '';
+      if (state.count != '') {
+        state.count = '';
+      }
     },
   },
   mutations: {

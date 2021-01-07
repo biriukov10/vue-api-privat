@@ -5,7 +5,7 @@
       UAH to USD
       <input
         type="radio"
-        v-model="$store.state.radio"
+        v-model="uahToUsd"
         class="convert-radio__radio"
         value="uah"
         name="price"
@@ -16,7 +16,7 @@
       USD to UAH
       <input
         type="radio"
-        v-model="$store.state.radio"
+        v-model="usdToUah"
         class="convert-radio__radio"
         value="usd"
         name="price"
@@ -24,29 +24,43 @@
       />
     </label>
     <button @click="toResult" class="convert-radio__btn">Change</button>
-    <router-link :to="linkBack" class="convert-radio__btn">Back to Home</router-link>
+    <router-link to="/" class="convert-radio__btn">Back to Home</router-link>
   </div>
 </template>
 
 <script>
+import { mapActions, mapMutations } from "vuex";
+
 export default {
-  data() {
-    return {
-      linkBack: "/",
-      linkTo: "result"
-    };
+  data: () => ({
+    uahToUsd: "",
+    usdToUah: "",
+  }),
+  async mounted() {
+    await this.getConvertNum();
   },
   methods: {
+    ...mapActions({
+      getConvertNum: "getConvertNum",
+    }),
+    ...mapMutations({
+      getRadioValue: "GET_RADIO_VALUE",
+    }),
     toResult() {
-      if (this.$store.state.radio != "") {
-        this.$router.push(this.linkTo);
+      if (this.usdToUah || this.uahToUsd != "") {
+        if (this.usdToUah) {
+          this.getRadioValue(this.usdToUah);
+        } else {
+          this.getRadioValue(this.uahToUsd);
+        }
+        this.$router.push("result");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss">
 .convert-radio {
   width: 100%;
   max-width: 300px;

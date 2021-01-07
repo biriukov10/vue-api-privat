@@ -1,21 +1,33 @@
 <template>
   <div class="result">
-    {{this.$store.state.getNum}}
-    <router-link :to="link" class="result__btn">Back to Home</router-link>
+    {{ radio === 'usd' ? getResultConvert.toFixed(2) + countValue.ticker : getResultConvert.toFixed(2) + usdValue }}
+    <router-link to="/" class="result__btn">Back to Home</router-link>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      link: "/"
-    };
+  data: () => ({
+    uahValue: "₴",
+    usdValue: "$",
+  }),
+  computed: {
+    ...mapState({
+      count: (state) => state.getInitialValue,
+      radio: (state) => state.radioValue,
+    }),
+    ...mapGetters({
+      countValue: "countValue",
+    }),
+    getResultConvert() {
+      if (this.radio === "usd") {
+        return this.countValue.price * +this.count;
+      } else {
+        return +this.count / this.countValue.price;
+      }
+    },
   },
-  computed: {},
-  mounted() {
-    this.$store.dispatch("getConvertNum");
-  }
 };
 </script>
 

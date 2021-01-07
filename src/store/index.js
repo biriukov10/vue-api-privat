@@ -6,33 +6,31 @@ Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
   state: {
-    radio: '',
-    count: '',
-    url: "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11",
-    getNum: null,
-    uahValue: "₴",
-    usdValue: '$'
+    radioValue: '',
+    getInitialValue: 0,
+    getData: null,
   },
   getters: {
-    reset(state) {
-      if (state.count != '') {
-        state.count = '';
-      }
-    },
+    countValue: state => state.getData
   },
   mutations: {
+    SET_VALUE: (state, value) => state.getInitialValue = value,
+    GET_RADIO_VALUE: (state, radio) => state.radioValue = radio,
+    GET_DATA: (state, data) => {
+      state.getData = {
+        ...data[0] = {
+          ticker: data[0].base_ccy,
+          price: data[0].sale
+        }
+      }
+    }
   },
   actions: {
-    getConvertNum() {
+    getConvertNum({commit}) {
       axios
-        .get(this.state.url)
+        .get('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
         .then(response => {
-          if (this.state.radio == 'usd') {
-            this.state.getNum = (response.data[0].sale * this.state.count).toFixed(2) + this.state.uahValue;
-          }
-          else if (this.state.radio == 'uah') {
-            this.state.getNum = (this.state.count / response.data[0].sale).toFixed(1) + this.state.usdValue;
-          }
+          commit('GET_DATA', response.data)
         })
         .catch(error => console.log(error));
     }

@@ -3,7 +3,7 @@
     <input
       type="number"
       class="forms__input"
-      v-model="$store.state.count"
+      v-model="value"
       placeholder="Enter currency ₴ or $"
     />
     <div class="forms-btn">
@@ -11,34 +11,48 @@
       <button
         class="forms-btn__item forms-btn__item--reset"
         type="reset"
-        @click="$store.getters.reset;"
+        @click="value = ''"
       >Clear</button>
     </div>
+    <p v-if="isValid" class="forms__warning">
+      This value must be greater than 0
+    </p>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "forms",
-  data() {
-    return {
-      link: "/convert"
-    };
-  },
+  data: () => ({
+    value: null,
+    isValid: false,
+  }),
+  computed: {},
   methods: {
+    ...mapMutations({
+      getValue: "SET_VALUE",
+    }),
     getCount() {
-      if (
-        this.$store.state.count != "" &&
-        this.$store.state.count == Number(this.$store.state.count)
-      ) {
-        this.$router.push(this.link);
+      if (+this.value <= 0) {
+        this.isValid = true;
       }
-    }
-  }
+
+      if (
+        +this.value != "" &&
+        +this.value == Number(+this.value) &&
+        +this.value > 0
+      ) {
+        this.getValue(this.value);
+        this.$router.push("/convert");
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .forms {
   width: 300px;
   margin: 200px auto 0;
@@ -89,6 +103,11 @@ export default {
         box-shadow: 0px 0px 4px 2px #f38c06;
       }
     }
+  }
+
+  &__warning {
+    color: red;
+    margin: 10px 0 0;
   }
 }
 </style>
